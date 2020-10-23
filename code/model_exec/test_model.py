@@ -45,12 +45,12 @@ def evaluate(
             pred_cpu = predicted.cpu()
             correct += (pred_cpu == labels).sum().item()
 
-            label_ones_idx = torch.squeeze(labels.nonzero())
+            label_ones_idx = torch.squeeze(labels.nonzero(as_tuple=False))
 
-            tp_idx = (pred_cpu[label_ones_idx]==labels[label_ones_idx]).nonzero()
+            tp_idx = (pred_cpu[label_ones_idx]==labels[label_ones_idx]).nonzero(as_tuple=False)
             tp += tp_idx.size()[0]
 
-            fp_idx = (pred_cpu[label_ones_idx]!=labels[label_ones_idx]).nonzero()
+            fp_idx = (pred_cpu[label_ones_idx]!=labels[label_ones_idx]).nonzero(as_tuple=False)
             fp += fp_idx.size()[0]
 
 
