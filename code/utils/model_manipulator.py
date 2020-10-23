@@ -7,7 +7,7 @@ def set_parameter_requires_grad(model, feature_extracting):
         for param in model.parameters():
             param.requires_grad = False
 
-def manipulateModel(model_name, is_feature_extraction,dim):
+def manipulateModel(model_name, is_feature_extraction=False,dim=-1):
     model = model_dict[model_name](pretrained=is_feature_extraction)
     set_parameter_requires_grad(model, True)
     #output layer

@@ -22,7 +22,6 @@ def evaluate(
     tp = 0
     fp = 0
 
-
     with torch.no_grad():
         for data in eval_data_loader:
             tmp_batch_size = len(data["labels"])
