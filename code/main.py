@@ -1,6 +1,5 @@
 from argparse import ArgumentParser
 import os
-import selector
 
 def main():
     parser = ArgumentParser()
@@ -9,7 +8,6 @@ def main():
     parser.add_argument("-d", "--data_dir", dest="data_dir", default=os.path.join("..","data"))
     args = parser.parse_args()
 
-    
 
 if __name__ == "__main__":
     main()

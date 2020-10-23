@@ -47,8 +47,6 @@ model_dict = \
 learning_rate = 1e-3
 nr_of_classes = 2
 
-time_stamp  = datetime.utcfromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S")
-
 optimizer_dict = {
     "Adadelta":torch.optim.Adadelta,
     "Adagrad":torch.optim.Adagrad,

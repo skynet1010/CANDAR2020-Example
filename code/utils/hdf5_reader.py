@@ -6,13 +6,12 @@ import h5py
 import os
 import cv2
 
-#TODO: optimieren! VIEL Bedarf
+#TODO: optimize |:->
 
 class Hdf5Dataset(torch.utils.data.Dataset):
-    def __init__(self, in_file_name, training_mode, ds_kind,data_composition, model_key, transform=None):
+    def __init__(self, in_file_name, ds_kind,data_composition, model_key, transform=None):
         super(Hdf5Dataset, self).__init__()
         self.file = h5py.File(in_file_name, "r")
-        self.training_mode = training_mode
         self.root_ds_dir = "{}/".format(ds_kind)
         self.dir_dict = {"data":"fus_data","labels":"labels"}
         self.n_images, self.nx, self.ny, self.nz = self.file[self.root_ds_dir+self.dir_dict["data"]].shape
@@ -45,24 +44,18 @@ class Hdf5Dataset(torch.utils.data.Dataset):
         return sample[:3,:,:]
 
     def nir(self,sample):
-        #return np.resize(sample[3,:,:],(1,self.nx,self.ny))
         return sample[3:4,:,:]
 
     def slope(self,sample):
-        #return np.resize(sample[4,:,:]/90.0,(1,self.nx,self.ny))
         return sample[4:5,:,:]/90.0
 
     def roughness(self,sample):
-        #return np.resize(sample[5,:,:]/78.78074645996094,(1,self.nx,self.ny))
         return sample[5:6,:,:]/78.78074645996094
 
-
     def ndvi(self,sample):
-        #return np.resize(sample[6,:,:],(1,self.nx,self.ny))
         return sample[6:7,:,:]
 
     def dom(self,sample):
-        #return np.resize(sample[7,:,:]/429.89739990234375,(1,self.nx,self.ny)) #DIESER WERT GILT NUR FÜR DAS ÜBERWACHTE LERNEN!!!!
         return sample[7:8,:,:]/429.89739990234375
 
     def rgb_nir(self,sample):
@@ -97,13 +90,10 @@ class Hdf5Dataset(torch.utils.data.Dataset):
         sample = self.get_sample(index)
         data={}
         data["imagery"] = self.data_composition_function(sample)
-        nr_of_layers = data["imagery"].shape[0]
+        nr_of_layers = data["imagery"].shape[0] 
+        data["labels"] = self.file[self.root_ds_dir+self.dir_dict["labels"]][index]
 
-        
-        if self.training_mode == "supervised":
-            data["labels"] = self.file[self.root_ds_dir+self.dir_dict["labels"]][index]
         return data
 
     def __len__(self):
         return self.n_images
-
