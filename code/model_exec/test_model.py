@@ -1,6 +1,6 @@
 import torch
-from code.utils.consts import loss_dict
-
+from utils.consts import loss_dict
+from typing import Dict
 
 def evaluate(
     model: torch.nn.Module,
@@ -35,7 +35,6 @@ def evaluate(
             output = model(img)
             
             out_softmax = softmax(output)
-
             loss = criterion(out_softmax, lbl_onehot)
 
             running_loss+=(loss.item()*tmp_batch_size)

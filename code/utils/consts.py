@@ -34,3 +34,9 @@ model2loss_dict={
     "wide_resnet50_2":"BCELoss",
     "resnet18":"BCELoss"
 }
+
+model2checkpoint_path = {
+    "alexnet":"best_alexnet_final.pth",
+    "wide_resnet50_2":"best_wide_resnet50_2_final.pth",
+    "resnet18":"best_resnet18_final.pth"
+}
