@@ -4,7 +4,7 @@
 
 Model execution example for verifying the achieved test results.
 
-From [[1]](http://doi.org/10.5281/zenodo.4117572) the datasets must be merged, decompressed and unpacked stored in folder /data. The initial naming is necessary or the code have to be adjusted properly.
+From [[1]](http://doi.org/10.5281/zenodo.4117572) all dataset parts (data[0-9][0-9]) must be merged, decompressed and unpacked stored in folder /data. The initial naming is necessary or the code have to be adjusted properly.
 The \*pth files from [[1]](http://doi.org/10.5281/zenodo.4117572) must be stored in /models. The initial naming is necessary or the code have to be adjusted.
 
 In /create_py_env/candar2020-env.txt are the necessary python packes listed. The instruction for building a proper conda environment is also mentioned at the heading of this file.
